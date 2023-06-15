@@ -1,0 +1,90 @@
+<div>
+    <!-- <h1 class="h3 text-gray-800" style="text-align: center;">All product</h1> -->
+
+    <!-- DataTales Example -->
+    <form action="/checkout" method="post">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="">
+                    <h4 class="m-0 font-weight-bold text-primary text-center">Cart Items</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-dark" id="dataTable" width="100%"
+                        style="font-weight: bold;">
+                        <thead>
+                            <tr>
+                                <th class="text-primary">S.no</th>
+                                <th class="text-primary">Title</th>
+                                <th class="text-primary">price</th>
+                                <th class="text-primary">Quantity</th>
+                                <th class="text-primary">Total</th>
+                                <th class="text-primary">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let grandTotal=0; for(let i=0; i < products.length; i++) { grandTotal=grandTotal +
+                                products[i].price; %>
+                                <tr>
+                                    <td>
+                                        <%= i + 1; %>
+                                    </td>
+                                    <td>
+                                        <%= products[i].title; %>
+                                    </td>
+                                    <td>
+                                        <%= products[i].price; %>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" id="productPrice_<%= products[i].id; %>"
+                                            value="<%= products[i].price; %>">
+                                        <input type="hidden" name="productId" value="<%= products[i].id; %>"
+                                            class="form-control">
+                                        <input type="number" name="productQuantity"
+                                            id="productQuantity_<%= products[i].id; %>" class="form-control"
+                                            onchange="updatePrice('<%= products[i].id; %>')" min="1" max="10" value="1">
+                                    </td>
+                                    <td>
+                                        <span id="productTotal_<%= products[i].id; %>" class="single-product-total">
+                                            <%= products[i].price; %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-danger">Remove</a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4" class="text-end">Grand Total</th>
+                                <th id="grandTotal">
+                                    <%= grandTotal; %>
+                                </th>
+                                <th>
+                                    <button type="submit" class="btn btn-success">proceed to checkout</button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script>
+    function updatePrice(productId) {
+        let productQuantity = parseInt($('#productQuantity_' + productId).val());
+        let productPrice = parseInt($('#productPrice_' + productId).val());
+        let total = productQuantity * productPrice;
+        $("#productTotal_" + productId).html(total);
+        let grandTotal = 0;
+        $('.single-product-total').each(function () {
+            let singleProPrice = parseInt($(this).html());
+            grandTotal = grandTotal + singleProPrice;
+        });
+        $('#grandTotal').html(grandTotal);
+    }
+</script>

@@ -1,0 +1,50 @@
+<div>
+    <form action="/admin/create-product" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create New Product</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button> -->
+        </div>
+        <div class="modal-body">
+            <% if(message); { %>
+                <h5 class="text-danger"><%= message; %></h5>
+                <% } %>
+            <div class="row">
+                <div class="col-6">
+                    <label>Title</label>
+                    <input type="text" name="title" id="title" class="form-control" placeholder="type title" />
+                </div>
+                <div class="col-6">
+                    <label>Price</label>
+                    <input type="number" name="price" id="price" class="form-control" placeholder="type price" />
+                </div>
+                <div class="col-6">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" placeholder="type Quantity" />
+                </div>
+                <div class="col-6">
+                    <label>category Id</label>
+                    <select name="categoryId" class="form-control" placeholder="select Category">
+                        <option value="">Select product category</option>
+                        <% for(let i = 0; i < category.length; i++){ 
+                            let cat = category[i]; %>
+                        <option value="<%= cat.id; %>"><%= cat.title; %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="col-12 mt-2">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" placeholder="type description"></textarea>
+                </div>  
+                <div class="col-12 mt-2">
+                    <label>Images</label>
+                    <input type="file" name="productImage" class="form-control" multiple="multiple" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,186 @@
+<div class="container mt-4">
+    <h1 class="text-center">checkout page</h1>
+    <form action="/place-order" method="post">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">customer Details</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 mt-2">
+                                        <label>Full Name</label>
+                                        <!-- <input type="hidden" name="customerId" class="form-control" value=""> -->
+                                        <input type="text" name="customerFullName" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        <label>Contact Number</label>
+                                        <input type="number" name="customerContact" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label>Pincode</label>
+                                        <input type="number" name="customerPincode" class="form-control" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Cart summary </h3>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-hover table-stripped">
+                                        <thead>
+                                            <tr>
+                                                <th>S. no </th>
+                                                <th>image</th>
+                                                <th>Title</th>
+                                                <th>price</th>
+                                                <th>quantity</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% let grandTotal = 0; 
+                                             for(let i=0; i < product.length; i++) { 
+                                                 let pro = product[i]; grandTotal += product[i].price; %>
+                                                 <tr>
+                                                    <td><%= i + 1; %></td>
+                                                    <td>
+                                                        <img src="http://localhost:3005/images/<%= pro.image; %>" height="50px" />
+                                                    </td>
+                                                    <input type="hidden" name="productId" value="<%= pro.id; %>">
+                                                    <td><%= pro.title; %></td>
+                                                    <input type="hidden" name="title" value="<%= pro.title; %>">
+                                                    <td><%= pro.price; %></td>
+                                                    <input type="hidden" name="price" value="<%= pro.price; %>">
+                                                    <td><%= pro.proQuantity; %></td>
+                                                    <input type="hidden" name="proQuantity" value="<%= pro.proQuantity; %>">
+                                                    <td><%= pro.total; %></td>
+                                                    <input type="hidden" name="total" value="<%= pro.total; %>">
+                                                </tr>
+                                                <% } %>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5" class="text text-end"> Grand total</th>
+                                                <th>
+                                                    <input type="hidden" name="" value="<%= grandTotal; %>"><%= grandTotal; %>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mt-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Billing Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6 mt-2">
+                                <label>first Name</label>
+                                <input type="text" name="billingFirstname" class="form-control" />
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label>last Name</label>
+                                <input type="text" name="billingLastname" class="form-control" />
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label>Contact Number</label>
+                                <input type="number" name="billingContact" class="form-control" />
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label>Pincode</label>
+                                <input type="number" name="billingPincode" class="form-control" />
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label>Address</label>
+                                <textarea name="billingAddress" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Shiping Information </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 mt-2">
+                                        <label>Address</label>
+                                        <textarea name="shipingAddress" class="form-control"></textarea>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label>City</label>
+                                        <input type="City" name="shipingCity" class="form-control" />
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        <label>Pincode</label>
+                                        <input type="number" name="shipingPincode" class="form-control" />
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        <label>Landmark</label>
+                                        <input type="text" name="shipingLandmark" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 mt-2 offset-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Payment Method</h3>
+                    </div>
+                    <div class="card-body">
+                        <label>
+                            <input type="radio" name="paymentMethod" value="cod" /> Cash on delivery
+                        </label><br />
+                        <label>
+                            <input type="radio" name="paymentMethod" value="netBanking" /> Internet Banking
+                        </label><br />
+                        <label>
+                            <input type="radio" name="paymentMethod" value="upi" /> UPI
+                        </label><br />
+                        <label>
+                            <input type="radio" name="paymentMethod" value="wallet" /> Wallet
+                        </label><br />
+                        <label>
+                            <input type="radio" name="paymentMethod" value="creditCard" /> Credit Card
+                        </label><br />
+                        <label>
+                            <input type="radio" name="paymentMethod" value="debitCard" /> Debit Card
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success mt-3"> Place Order</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,43 @@
+<div>
+    <h1 class="h3 text-gray-800" style="text-align: center;">All Category</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div>
+                    <a href="/admin/create-category" class="btn btn-primary">Add New</a>
+                </div>
+                <div class="col-6">
+                    <h6 class="m-0 font-weight-bold text-primary mt-3">Category</h6>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-dark table-striped" id="dataTable" width="100%"
+                    cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-primary">S.NO</th>
+                            <th class="text-primary">Title</th>
+                            <th class="text-primary">Description</th>
+                            <th class="text-primary">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let i = 0; i < category.length; i++){ 
+                            let cat = category[i]; %>
+                        <tr>
+                            <td><%= i + 1; %></td>
+                            <td><%= cat.title; %></td>
+                            <td><%= cat.description; %></td>
+                            <td>
+                                <a href="/admin/edit-category?categoryId=<%= cat.id; %>" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="/admin/delete-category?categoryId=<%= cat.id; %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you')">Delete</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
